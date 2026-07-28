@@ -1,0 +1,65 @@
+export const products = [
+  {
+    id: "rakhi-1",
+    name: "Designer Rakhi",
+    price: 199,
+    image: "/products/rakhi.jpg",
+    category: "Rakhi",
+  },
+  {
+    id: "bedsheet-1",
+    name: "Premium Cotton Bedsheet",
+    price: 999,
+    image: "/products/bedsheet.jpg",
+    category: "Bedsheets",
+  },
+  {
+    id: "bedsheet-2",
+    name: "King Size Bedsheet",
+    price: 1299,
+    image: "/products/bedsheet2.jpg",
+    category: "Bedsheets",
+  },
+  {
+    id: "pillow-1",
+    name: "Luxury Pillow Cover",
+    price: 399,
+    image: "/products/pillow-cover.jpg",
+    category: "Pillow Covers",
+  },
+  {
+    id: "pillow-2",
+    name: "Printed Pillow Cover",
+    price: 349,
+    image: "/products/pillow2.jpg",
+    category: "Pillow Covers",
+  },
+  {
+    id: "tshirt-1",
+    name: "Oversized T-Shirt",
+    price: 699,
+    image: "/products/tshirt.jpg",
+    category: "T-Shirts",
+  },
+  {
+    id: "tshirt-2",
+    name: "Graphic Cotton T-Shirt",
+    price: 799,
+    image: "/products/tshirt2.jpg",
+    category: "T-Shirts",
+  },
+  {
+    id: "leggings-1",
+    name: "Comfort Leggings",
+    price: 599,
+    image: "/products/leggings.jpg",
+    category: "Leggings",
+  },
+  {
+    id: "leggings-2",
+    name: "Yoga Leggings",
+    price: 749,
+    image: "/products/leggings2.jpg",
+    category: "Leggings",
+  }
+];

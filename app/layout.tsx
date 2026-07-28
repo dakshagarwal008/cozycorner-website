@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
 
+import { CartProvider } from "@/context/CartContext";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-heading",
@@ -26,7 +30,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${playfair.variable} ${poppins.variable}`}>
-        {children}
+
+        <CartProvider>
+
+          {/* Navbar appears on every page */}
+          <Navbar />
+
+          {/* Page content */}
+          {children}
+
+          {/* Footer appears on every page */}
+          <Footer />
+
+        </CartProvider>
+
       </body>
     </html>
   );
