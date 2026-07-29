@@ -46,15 +46,14 @@ export async function getProduct(id: string) {
     return null;
   }
 }
-
-export async function getProducts() {
+export async function getProducts(): Promise<Product[]> {
   try {
     const querySnapshot = await getDocs(collection(db, "products"));
 
     const products = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
-    }));
+    })) as Product[];
 
     return products;
   } catch (error) {

@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { getOrder, Order } from "@/services/orderService";
 
-export default function TrackOrderPage() {
+function TrackOrderContent() {
   const searchParams = useSearchParams();
   const orderId = searchParams.get("id");
 
@@ -14,7 +14,10 @@ export default function TrackOrderPage() {
 
   useEffect(() => {
     async function loadOrder() {
-      if (!orderId) return;
+      if (!orderId) {
+        setLoading(false);
+        return;
+      }
 
       const data = await getOrder(orderId);
 
@@ -91,7 +94,6 @@ export default function TrackOrderPage() {
         <div className="space-y-5">
 
           {steps.map((step, index) => {
-
             const completed = index <= currentStep;
 
             return (
@@ -112,7 +114,6 @@ export default function TrackOrderPage() {
                 <span className="capitalize text-lg">
                   {step}
                 </span>
-
               </div>
             );
           })}
@@ -122,5 +123,21 @@ export default function TrackOrderPage() {
       </div>
 
     </main>
+  );
+}
+
+function LoadingTrackOrder() {
+  return (
+    <main className="max-w-4xl mx-auto py-20 px-6">
+      Loading order...
+    </main>
+  );
+}
+
+export default function TrackOrderPage() {
+  return (
+    <Suspense fallback={<LoadingTrackOrder />}>
+      <TrackOrderContent />
+    </Suspense>
   );
 }
