@@ -30,7 +30,7 @@ export default function EditProductPage() {
 
   if (loading) {
     return (
-      <main className="max-w-5xl mx-auto py-10">
+      <main className="mx-auto w-full max-w-2xl px-4 py-10 sm:px-6">
         Loading...
       </main>
     );
@@ -38,7 +38,7 @@ export default function EditProductPage() {
 
   if (!product) {
     return (
-      <main className="max-w-5xl mx-auto py-10">
+      <main className="mx-auto w-full max-w-2xl px-4 py-10 sm:px-6">
         Product not found.
       </main>
     );
@@ -47,10 +47,10 @@ export default function EditProductPage() {
 async function handleSave() {
   if (!product || !params.id) return;
 
-  const success = await updateProduct(
-    params.id as string,
-    product
-  );
+  const success = await updateProduct(params.id as string, {
+    ...product,
+    rakhi: product.category.trim().toLowerCase() === "rakhi",
+  });
 
   if (success) {
     alert("Product updated successfully!");
@@ -61,8 +61,8 @@ async function handleSave() {
 }
 
   return (
-    <main className="max-w-5xl mx-auto py-10">
-      <h1 className="text-4xl font-bold mb-8">
+    <main className="mx-auto w-full max-w-2xl px-4 py-10 sm:px-6">
+      <h1 className="mb-8 text-3xl font-bold sm:text-4xl">
         Edit Product
       </h1>
 <div className="space-y-5">
@@ -139,7 +139,7 @@ async function handleSave() {
     />
   </div>
 
-  <div className="flex gap-8">
+  <div className="flex flex-col gap-4 sm:flex-row sm:gap-8">
 
     <label className="flex items-center gap-2">
       <input
@@ -175,7 +175,7 @@ async function handleSave() {
 
 <button
   onClick={handleSave}
-  className="mt-8 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700"
+  className="mt-8 w-full rounded-lg bg-green-600 px-6 py-3 text-white hover:bg-green-700 sm:w-auto"
 >
   Save Changes
 </button>

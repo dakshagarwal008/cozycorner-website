@@ -9,12 +9,12 @@ function OrderSuccessContent() {
   const orderId = searchParams.get("id");
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-[#FAF7F2] px-6">
-      <div className="max-w-xl w-full bg-white rounded-3xl shadow-lg p-10 text-center">
+    <main className="flex min-h-screen items-center justify-center bg-[#FAF7F2] px-4 py-10 sm:px-6">
+      <div className="w-full max-w-xl rounded-3xl bg-white p-6 text-center shadow-lg sm:p-10">
 
         <div className="text-6xl mb-5">🎉</div>
 
-        <h1 className="text-4xl font-bold text-[#6F4E37]">
+        <h1 className="text-3xl font-bold text-[#6F4E37] sm:text-4xl">
           Order Placed Successfully!
         </h1>
 
@@ -57,8 +57,8 @@ function OrderSuccessContent() {
 
 function LoadingOrderSuccess() {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-[#FAF7F2] px-6">
-      <div className="max-w-xl w-full bg-white rounded-3xl shadow-lg p-10 text-center">
+    <main className="flex min-h-screen items-center justify-center bg-[#FAF7F2] px-4 py-10 sm:px-6">
+      <div className="w-full max-w-xl rounded-3xl bg-white p-6 text-center shadow-lg sm:p-10">
         <div className="text-4xl mb-4">🎉</div>
 
         <h1 className="text-2xl font-bold text-[#6F4E37]">

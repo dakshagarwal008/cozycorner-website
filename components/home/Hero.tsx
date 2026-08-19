@@ -21,8 +21,7 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative z-10 mx-auto grid min-h-[calc(100vh-82px)] max-w-7xl grid-cols-1 items-center gap-14 px-6 py-14 sm:px-8 lg:grid-cols-2 lg:gap-20 lg:px-10">
-
+<div className="relative z-10 mx-auto grid min-h-[calc(100vh-82px)] w-full max-w-7xl grid-cols-1 items-center gap-12 px-4 py-10 sm:px-6 sm:py-12 md:px-8 lg:grid-cols-2 lg:gap-20 lg:px-10 lg:py-16">
         {/* LEFT */}
         <div className="text-center lg:text-left">
 
@@ -47,8 +46,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 35 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="font-[var(--font-heading)] text-[3.4rem] leading-[0.98] tracking-tight text-[#4A2C1A] sm:text-6xl lg:text-7xl xl:text-[5.8rem]"
-          >
+className="font-[var(--font-heading)] text-5xl leading-tight tracking-tight text-[#4A2C1A] sm:text-6xl lg:text-7xl xl:text-[5.8rem]"          >
             Make Your
             <br />
 
@@ -64,8 +62,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25, duration: 0.7 }}
-            className="mx-auto mt-7 max-w-xl text-[15px] leading-7 text-[#6B5A4D] sm:text-lg lg:mx-0"
-          >
+className="mx-auto mt-6 max-w-xl text-base leading-7 text-[#6B5A4D] sm:text-lg lg:mx-0"          >
             Discover beautiful home décor, thoughtful gifts,
             and lifestyle pieces designed to bring warmth and
             personality into every corner of your life.
@@ -120,8 +117,7 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.92, x: 30 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.15 }}
-          className="relative mx-auto w-full max-w-[560px] lg:max-w-none"
-        >
+className="relative mx-auto w-full max-w-md sm:max-w-lg lg:max-w-none"        >
 
           {/* Gold ring */}
           <motion.div
@@ -143,8 +139,7 @@ export default function Hero() {
             <img
               src="/hero.jpg"
               alt="Beautiful CozyCorner lifestyle collection"
-              className="h-[420px] w-full object-cover transition duration-1000 hover:scale-105 sm:h-[520px] lg:h-[590px]"
-            />
+className="h-[320px] w-full object-cover transition duration-1000 hover:scale-105 sm:h-[420px] md:h-[500px] lg:h-[590px]"            />
 
             {/* Image overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#3B2518]/40 via-transparent to-transparent" />
@@ -175,8 +170,7 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.7 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1.1, duration: 0.6 }}
-            className="absolute -bottom-5 -right-3 z-20 flex h-20 w-20 items-center justify-center rounded-full border-4 border-[#FAF7F2] bg-[#6F4E37] text-center shadow-lg sm:-right-5 sm:h-24 sm:w-24"
-          >
+className="absolute bottom-3 right-3 z-20 flex h-16 w-16 items-center justify-center rounded-full border-4 border-[#FAF7F2] bg-[#6F4E37] text-center shadow-lg sm:-bottom-5 sm:-right-5 sm:h-24 sm:w-24"          >
             <div>
               <p className="font-[var(--font-heading)] text-lg text-[#D4AF37]">
                 Made

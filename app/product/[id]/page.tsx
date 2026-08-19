@@ -40,12 +40,12 @@ export default function ProductPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-[#FAF7F2] px-6 py-20">
+      <main className="min-h-screen bg-[#FAF7F2] px-4 py-12 sm:px-6 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <div className="h-6 w-24 animate-pulse rounded bg-[#E8DCCB]" />
 
           <div className="mt-10 grid gap-12 md:grid-cols-2">
-            <div className="h-[500px] animate-pulse rounded-[2rem] bg-[#E8DCCB]" />
+            <div className="h-[320px] animate-pulse rounded-[2rem] bg-[#E8DCCB] sm:h-[500px]" />
 
             <div className="space-y-5">
               <div className="h-10 w-3/4 animate-pulse rounded bg-[#E8DCCB]" />
@@ -60,17 +60,17 @@ export default function ProductPage() {
 
   if (!product) {
     return (
-      <main className="min-h-screen bg-[#FAF7F2] px-6 py-20">
+      <main className="min-h-screen bg-[#FAF7F2] px-4 py-12 sm:px-6 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <BackButton />
 
           <div className="py-24 text-center">
-            <h1 className="font-[var(--font-heading)] text-4xl text-[#4A2C1A]">
+            <h1 className="font-[var(--font-heading)] text-3xl text-[#4A2C1A] sm:text-4xl">
               Product Not Found
             </h1>
 
             <p className="mt-3 text-[#756457]">
-              Sorry, we couldn't find the product you're looking for.
+              Sorry, we couldn&apos;t find the product you&apos;re looking for.
             </p>
 
             <button

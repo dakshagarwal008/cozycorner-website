@@ -156,7 +156,7 @@ export default function AddProductPage() {
         description: form.description.trim(),
         imageUrl,
         featured: false,
-        rakhi: false,
+        rakhi: form.category.trim().toLowerCase() === "rakhi",
         createdAt: new Date().toISOString(),
       });
 

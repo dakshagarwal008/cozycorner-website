@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { getProducts, deleteProduct } from "@/services/productService";
+import { Product } from "@/types/product";
 
 export default function AdminProductsPage() {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
   async function loadProducts() {
@@ -28,29 +29,40 @@ export default function AdminProductsPage() {
   }
 
   useEffect(() => {
-    loadProducts();
+    let isActive = true;
+
+    void getProducts().then((data) => {
+      if (isActive) {
+        setProducts(data);
+        setLoading(false);
+      }
+    });
+
+    return () => {
+      isActive = false;
+    };
   }, []);
 
   if (loading) {
     return (
-      <div className="p-10 text-center text-xl">
+      <div className="p-5 text-center text-xl sm:p-10">
         Loading Products...
       </div>
     );
   }
 
   return (
-    <main className="max-w-7xl mx-auto p-8">
+    <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-10">
 
-      <div className="flex justify-between items-center mb-8">
+      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
-        <h1 className="text-4xl font-bold text-[#6F4E37]">
+        <h1 className="text-3xl font-bold text-[#6F4E37] sm:text-4xl">
           Products
         </h1>
 
         <Link
-          href="/admin/products/add"
-          className="bg-[#6F4E37] text-white px-5 py-3 rounded-lg"
+          href="/admin/products/new"
+          className="w-full rounded-lg bg-[#6F4E37] px-5 py-3 text-center text-white sm:w-auto"
         >
           + Add Product
         </Link>
@@ -59,7 +71,7 @@ export default function AdminProductsPage() {
 
       <div className="overflow-x-auto">
 
-        <table className="w-full border">
+        <table className="min-w-[680px] w-full border">
 
           <thead className="bg-[#F6F1EB]">
 
@@ -112,7 +124,7 @@ export default function AdminProductsPage() {
                   <div className="flex justify-center gap-3">
 
                     <Link
-                      href={`/admin/products/edit/${product.id}`}
+                      href={`/admin/products/${product.id}/edit`}
                       className="bg-blue-500 text-white px-3 py-2 rounded"
                     >
                       Edit

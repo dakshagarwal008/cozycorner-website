@@ -22,3 +22,363 @@ body {
   color: var(--foreground);
   font-family: var(--font-body), sans-serif;
 }
+
+/* =========================================
+   COZYCORNER - RESPONSIVE FOUNDATION
+   ========================================= */
+
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Make sizing predictable */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Prevent media from overflowing */
+img,
+video,
+svg,
+canvas {
+  max-width: 100%;
+}
+
+/* Prevent long text from forcing horizontal scrolling */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a {
+  overflow-wrap: break-word;
+}
+
+/* Buttons and inputs should never overflow */
+button,
+input,
+textarea,
+select {
+  max-width: 100%;
+}
+
+/* =========================================
+   RESPONSIVE CONTAINER
+   ========================================= */
+
+.responsive-container {
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* =========================================
+   TABLETS
+   ========================================= */
+
+@media (max-width: 1024px) {
+  .responsive-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* =========================================
+   PHONES
+   ========================================= */
+
+@media (max-width: 768px) {
+  .responsive-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 9vw, 3.5rem);
+    line-height: 1.1;
+  }
+
+  h2 {
+    font-size: clamp(1.6rem, 7vw, 2.5rem);
+    line-height: 1.15;
+  }
+
+  h3 {
+    font-size: clamp(1.2rem, 5vw, 1.75rem);
+  }
+}
+
+/* =========================================
+   SMALL PHONES
+   ========================================= */
+
+@media (max-width: 480px) {
+  .responsive-container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+  }
+}
+
+/* =========================================
+   VERY SMALL PHONES
+   ========================================= */
+
+@media (max-width: 360px) {
+  .responsive-container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+}
+/* =====================================================
+   COZYCORNER GLOBAL RESPONSIVE SYSTEM
+   ===================================================== */
+
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Predictable sizing everywhere */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Media must never exceed its parent */
+img,
+video,
+iframe,
+svg,
+canvas {
+  max-width: 100%;
+}
+
+/* Long content must not create horizontal scrolling */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+button {
+  overflow-wrap: anywhere;
+}
+
+/* Forms */
+input,
+textarea,
+select,
+button {
+  max-width: 100%;
+}
+
+/* =====================================================
+   RESPONSIVE PAGE CONTAINER
+   ===================================================== */
+
+.page-container {
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+/* =====================================================
+   LARGE TABLETS / SMALL LAPTOPS
+   ===================================================== */
+
+@media (max-width: 1200px) {
+  .page-container {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+}
+
+/* =====================================================
+   TABLETS
+   ===================================================== */
+
+@media (max-width: 900px) {
+  .page-container {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+}
+
+/* =====================================================
+   PHONES
+   ===================================================== */
+
+@media (max-width: 640px) {
+  .page-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* =====================================================
+   SMALL PHONES
+   ===================================================== */
+
+@media (max-width: 400px) {
+  .page-container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+/* =====================================================
+   RESPONSIVE TYPOGRAPHY
+   ===================================================== */
+
+.responsive-title {
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  line-height: 1.08;
+}
+
+.responsive-heading {
+  font-size: clamp(1.6rem, 3.5vw, 3rem);
+  line-height: 1.15;
+}
+
+.responsive-text {
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+}
+
+/* =====================================================
+   RESPONSIVE GRID
+   ===================================================== */
+
+.responsive-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 1100px) {
+  .responsive-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 800px) {
+  .responsive-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .responsive-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+/* =====================================================
+   RESPONSIVE FLEX
+   ===================================================== */
+
+.responsive-flex {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+@media (max-width: 700px) {
+  .responsive-flex {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+}
+
+/* =====================================================
+   RESPONSIVE BUTTONS
+   ===================================================== */
+
+.responsive-button {
+  min-height: 44px;
+  padding: 12px 24px;
+  max-width: 100%;
+}
+
+@media (max-width: 480px) {
+  .responsive-button {
+    width: 100%;
+  }
+}
+
+/* =====================================================
+   RESPONSIVE SECTIONS
+   ===================================================== */
+
+.responsive-section {
+  width: 100%;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+@media (max-width: 768px) {
+  .responsive-section {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+}
+
+@media (max-width: 480px) {
+  .responsive-section {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}

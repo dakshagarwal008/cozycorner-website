@@ -36,8 +36,8 @@ const categories = [
 
 export default function CategoryGrid() {
   return (
-    <section className="bg-[#FAF7F2] px-6 py-20 md:py-28">
-      <div className="mx-auto max-w-7xl">
+    <section className="w-full bg-[#FAF7F2] px-4 py-14 sm:px-6 sm:py-20 md:px-8 md:py-24 lg:py-28">
+      <div className="mx-auto w-full max-w-7xl">
 
         {/* Heading */}
         <motion.div
@@ -45,17 +45,17 @@ export default function CategoryGrid() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="mb-12 text-center"
+          className="mb-10 text-center sm:mb-12"
         >
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-[#B58A32]">
+          <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B58A32] sm:text-xs sm:tracking-[0.3em]">
             Explore our collection
           </p>
 
-          <h2 className="font-[var(--font-heading)] text-4xl text-[#4A2C1A] md:text-5xl">
-            Find Something You’ll Love
+          <h2 className="font-[var(--font-heading)] text-3xl leading-tight text-[#4A2C1A] sm:text-4xl md:text-5xl">
+            Find Something You&apos;ll Love
           </h2>
 
-          <p className="mx-auto mt-4 max-w-2xl text-[#756457]">
+          <p className="mx-auto mt-4 max-w-2xl px-2 text-sm leading-6 text-[#756457] sm:text-base sm:leading-7">
             From elegant home décor to thoughtful gifts,
             discover pieces selected to make everyday moments
             feel a little more special.
@@ -63,7 +63,7 @@ export default function CategoryGrid() {
         </motion.div>
 
         {/* Category cards */}
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
           {categories.map((category, index) => (
             <motion.div
               key={category.title}
@@ -74,16 +74,18 @@ export default function CategoryGrid() {
                 duration: 0.6,
                 delay: index * 0.1,
               }}
+              className="min-w-0"
             >
               <Link
                 href={category.href}
-                className="group relative block overflow-hidden rounded-3xl"
+                className="group relative block w-full overflow-hidden rounded-2xl sm:rounded-3xl"
               >
                 {/* Image */}
-                <div className="relative h-[390px] overflow-hidden">
+                <div className="relative h-[320px] w-full overflow-hidden sm:h-[360px] md:h-[400px] lg:h-[390px]">
                   <img
                     src={category.image}
                     alt={category.title}
+                    loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
 
@@ -91,21 +93,22 @@ export default function CategoryGrid() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
 
                   {/* Content */}
-                  <div className="absolute bottom-0 left-0 w-full p-6 text-white">
-                    <p className="mb-2 text-xs uppercase tracking-[0.2em] text-[#E6C66A]">
+                  <div className="absolute bottom-0 left-0 w-full p-5 text-white sm:p-6">
+                    <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-[#E6C66A] sm:text-xs">
                       Discover
                     </p>
 
-                    <h3 className="font-[var(--font-heading)] text-3xl">
+                    <h3 className="font-[var(--font-heading)] text-2xl leading-tight sm:text-3xl">
                       {category.title}
                     </h3>
 
-                    <p className="mt-2 text-sm text-white/80">
+                    <p className="mt-2 max-w-[260px] text-xs leading-5 text-white/80 sm:text-sm sm:leading-6">
                       {category.description}
                     </p>
 
-                    <div className="mt-4 flex items-center gap-2 text-sm font-medium">
+                    <div className="mt-3 flex items-center gap-2 text-xs font-medium sm:mt-4 sm:text-sm">
                       Explore
+
                       <span className="transition-transform duration-300 group-hover:translate-x-2">
                         →
                       </span>
@@ -116,7 +119,6 @@ export default function CategoryGrid() {
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );

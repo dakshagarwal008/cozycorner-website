@@ -19,7 +19,7 @@ export default function Dashboard() {
         </Link>
 
         <Link
-          href="/admin/products/add"
+          href="/admin/products/new"
           className="bg-white shadow-lg rounded-xl p-8 hover:shadow-xl"
         >
           <h2 className="text-2xl font-semibold">Add Product</h2>

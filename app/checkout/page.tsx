@@ -13,8 +13,8 @@ import BackButton from "@/components/common/BackButton";
 export default function CheckoutPage() {
   const router = useRouter();
   const { cart, clearCart } = useCart();
-  const [email, setEmail] = useState("");
 
+  const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
@@ -30,15 +30,10 @@ export default function CheckoutPage() {
   // VALIDATION
   // -----------------------------
 
-  // Indian mobile number:
-  // Exactly 10 digits and starts with 6, 7, 8 or 9
   const isValidPhone = /^[6-9]\d{9}$/.test(phone);
 
-  // Indian pincode:
-  // Exactly 6 digits and cannot start with 0
   const isValidPincode = /^[1-9]\d{5}$/.test(pincode);
 
-  // Name: letters, spaces, apostrophe and dot
   const isValidName =
     /^[A-Za-z][A-Za-z .']{2,49}$/.test(name.trim());
 
@@ -58,9 +53,7 @@ export default function CheckoutPage() {
     e.preventDefault();
 
     if (!isValidName) {
-      alert(
-        "Please enter a valid name using letters only."
-      );
+      alert("Please enter a valid name using letters only.");
       return;
     }
 
@@ -72,16 +65,12 @@ export default function CheckoutPage() {
     }
 
     if (!isValidPincode) {
-      alert(
-        "Please enter a valid 6-digit Indian pincode."
-      );
+      alert("Please enter a valid 6-digit Indian pincode.");
       return;
     }
 
     if (!isValidAddress) {
-      alert(
-        "Please enter your complete delivery address."
-      );
+      alert("Please enter your complete delivery address.");
       return;
     }
 
@@ -120,22 +109,23 @@ export default function CheckoutPage() {
       // -----------------------------
       // CREATE ORDER
       // -----------------------------
-const result = await createOrder({
-  customerName: name.trim(),
-  email: email.trim(),   // <-- Add this line
-  phone: phone.trim(),
-  address: address.trim(),
 
-  items: cart.map((item) => ({
-    id: item.id,
-    name: item.name,
-    price: item.price,
-    quantity: item.quantity,
-  })),
+      const result = await createOrder({
+        customerName: name.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
+        address: address.trim(),
 
-  total,
-  status: "pending",
-});
+        items: cart.map((item) => ({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+        })),
+
+        total,
+        status: "pending",
+      });
 
       if (!result.success) {
         alert("Failed to place order. Please try again.");
@@ -143,20 +133,28 @@ const result = await createOrder({
         return;
       }
 
-      await fetch("/api/send-order-email", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    customerName: name,
-    email,
-    phone,
-    address,
-    items: cart,
-    total,
-  }),
-});
+      // -----------------------------
+      // SEND ORDER EMAIL
+      // -----------------------------
+
+      try {
+        await fetch("/api/send-order-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            customerName: name.trim(),
+            email: email.trim(),
+            phone: phone.trim(),
+            address: address.trim(),
+            items: cart,
+            total,
+          }),
+        });
+      } catch (emailError) {
+        console.error("Email notification failed:", emailError);
+      }
 
       // -----------------------------
       // REDUCE STOCK
@@ -173,10 +171,72 @@ const result = await createOrder({
         }
       }
 
-      // Clear cart
+      // -----------------------------
+      // CREATE WHATSAPP MESSAGE
+      // -----------------------------
+
+      const whatsappNumber = "917000626375";
+
+      const orderId = result.id;
+
+      const productDetails = cart
+        .map(
+          (item) =>
+            `• ${item.name} × ${item.quantity} — ₹${
+              item.price * item.quantity
+            }`
+        )
+        .join("\n");
+
+      const whatsappMessage = `
+Hello CozyCorner Lifestyle 👋
+
+I would like to place an order.
+
+*Order ID:* ${orderId}
+
+*Customer Details*
+Name: ${name.trim()}
+Phone: +91 ${phone.trim()}
+Email: ${email.trim() || "Not provided"}
+
+*Delivery Address*
+${address.trim()}
+Pincode: ${pincode}
+
+*Order Details*
+${productDetails}
+
+*Total Amount: ₹${total}*
+
+Please confirm my order and share the payment details.
+
+Thank you!
+      `.trim();
+
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+        whatsappMessage
+      )}`;
+
+      // -----------------------------
+      // CLEAR CART
+      // -----------------------------
+
       clearCart();
 
-router.push(`/order-success?id=${result.id}`);
+      // -----------------------------
+      // OPEN WHATSAPP
+      // -----------------------------
+
+      window.location.href = whatsappUrl;
+
+      // -----------------------------
+      // ORDER SUCCESS PAGE
+      // -----------------------------
+
+      setTimeout(() => {
+        router.push(`/order-success?id=${orderId}`);
+      }, 1000);
     } catch (error) {
       console.error("Order error:", error);
       alert("Something went wrong. Please try again.");
@@ -191,12 +251,12 @@ router.push(`/order-success?id=${result.id}`);
 
   if (cart.length === 0) {
     return (
-      <main className="min-h-screen bg-[#FAF7F2] px-6 py-16">
+      <main className="min-h-screen bg-[#FAF7F2] px-4 py-10 sm:px-6 sm:py-16">
         <div className="mx-auto max-w-3xl">
           <BackButton />
 
-          <div className="mt-8 rounded-3xl bg-white p-10 text-center shadow-sm">
-            <h1 className="font-[var(--font-heading)] text-4xl text-[#4A2C1A]">
+          <div className="mt-8 rounded-3xl bg-white p-6 text-center shadow-sm sm:p-10">
+            <h1 className="font-[var(--font-heading)] text-3xl text-[#4A2C1A] sm:text-4xl">
               Checkout
             </h1>
 
@@ -223,7 +283,6 @@ router.push(`/order-success?id=${result.id}`);
   return (
     <main className="min-h-screen bg-[#FAF7F2] px-5 py-12 sm:px-6 md:py-16">
       <div className="mx-auto max-w-5xl">
-
         <BackButton />
 
         {/* HEADER */}
@@ -232,7 +291,7 @@ router.push(`/order-success?id=${result.id}`);
             Almost there
           </p>
 
-          <h1 className="mt-3 font-[var(--font-heading)] text-5xl text-[#4A2C1A]">
+          <h1 className="mt-3 font-[var(--font-heading)] text-3xl text-[#4A2C1A] sm:text-5xl">
             Checkout
           </h1>
 
@@ -242,7 +301,6 @@ router.push(`/order-success?id=${result.id}`);
         </div>
 
         <div className="grid gap-8 lg:grid-cols-[1fr_380px]">
-
           {/* CUSTOMER DETAILS */}
           <form
             onSubmit={handleSubmit}
@@ -253,7 +311,6 @@ router.push(`/order-success?id=${result.id}`);
             </h2>
 
             <div className="mt-7 space-y-6">
-
               {/* NAME */}
               <div>
                 <label className="mb-2 block text-sm font-semibold text-[#4A2C1A]">
@@ -267,7 +324,6 @@ router.push(`/order-success?id=${result.id}`);
                   onChange={(e) => {
                     const value = e.target.value;
 
-                    // Only allow letters, spaces, apostrophe and dot
                     if (/^[A-Za-z .']*$/.test(value)) {
                       setName(value);
                     }
@@ -288,20 +344,21 @@ router.push(`/order-success?id=${result.id}`);
                 )}
               </div>
 
+              {/* EMAIL */}
               <div>
-  <label className="block font-medium mb-2">
-    Email Address
-  </label>
+                <label className="mb-2 block text-sm font-semibold text-[#4A2C1A]">
+                  Email Address
+                </label>
 
-  <input
-    type="email"
-    value={email}
-    onChange={(e) => setEmail(e.target.value)}
-    placeholder="Enter your email"
-    required
-    className="w-full border rounded-xl p-3"
-  />
-</div>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  required
+                  className="w-full rounded-xl border border-[#E0D4C6] px-4 py-3 outline-none focus:border-[#B58A32] focus:ring-2 focus:ring-[#D4AF37]/10"
+                />
+              </div>
 
               {/* PHONE */}
               <div>
@@ -322,7 +379,6 @@ router.push(`/order-success?id=${result.id}`);
                     maxLength={10}
                     onChange={(e) => {
                       const value = e.target.value.replace(/\D/g, "");
-
                       setPhone(value.slice(0, 10));
                     }}
                     placeholder="9876543210"
@@ -370,13 +426,8 @@ router.push(`/order-success?id=${result.id}`);
                 />
 
                 <div className="mt-1 flex justify-between text-xs text-[#8A786A]">
-                  <span>
-                    Minimum 10 characters
-                  </span>
-
-                  <span>
-                    {address.length}/300
-                  </span>
+                  <span>Minimum 10 characters</span>
+                  <span>{address.length}/300</span>
                 </div>
               </div>
 
@@ -394,7 +445,6 @@ router.push(`/order-success?id=${result.id}`);
                   maxLength={6}
                   onChange={(e) => {
                     const value = e.target.value.replace(/\D/g, "");
-
                     setPincode(value.slice(0, 6));
                   }}
                   placeholder="Enter 6-digit pincode"
@@ -424,18 +474,26 @@ router.push(`/order-success?id=${result.id}`);
             <button
               type="submit"
               disabled={!formIsValid || loading}
-              className={`mt-8 w-full rounded-xl py-4 text-lg font-semibold transition ${
+              className={`mt-8 flex w-full items-center justify-center gap-3 rounded-xl py-4 text-lg font-semibold transition ${
                 !formIsValid || loading
                   ? "cursor-not-allowed bg-gray-300 text-gray-500"
-                  : "bg-[#6F4E37] text-white shadow-md hover:-translate-y-0.5 hover:bg-[#4A2C1A]"
+                  : "bg-[#25D366] text-white shadow-md hover:-translate-y-0.5 hover:bg-[#20BD5A] hover:shadow-lg"
               }`}
             >
-              {loading ? "Placing Order..." : "Place Order"}
+              {loading ? (
+                "Processing Order..."
+              ) : (
+                <>
+                  <span className="text-xl">💬</span>
+                  Place Order via WhatsApp
+                </>
+              )}
             </button>
 
-            <p className="mt-4 text-center text-xs text-[#8A786A]">
-              Please check your details carefully before placing
-              your order.
+            <p className="mt-4 text-center text-xs leading-5 text-[#8A786A]">
+              Your order will be saved and WhatsApp will open with
+              your order details. We will confirm the order and
+              share payment details with you.
             </p>
           </form>
 
@@ -499,7 +557,6 @@ router.push(`/order-success?id=${result.id}`);
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </main>

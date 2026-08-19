@@ -94,7 +94,7 @@ const totalRevenue = orders
 
   if (loading) {
     return (
-      <main className="max-w-7xl mx-auto py-10 px-6">
+      <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-10">
         <h1 className="text-3xl font-bold">
           Loading orders...
         </h1>
@@ -103,8 +103,8 @@ const totalRevenue = orders
   }
 
   return (
-    <main className="max-w-7xl mx-auto py-10 px-6">
-      <h1 className="text-4xl font-bold mb-8">
+    <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-10">
+      <h1 className="mb-6 text-3xl font-bold sm:mb-8 sm:text-4xl">
         Orders
       </h1>
 
@@ -157,7 +157,7 @@ const totalRevenue = orders
 
 </div>
 
-<div className="mb-8 rounded-2xl border border-[#E7DCCF] bg-[#FAF7F2] p-6 shadow-sm">
+<div className="mb-8 rounded-2xl border border-[#E7DCCF] bg-[#FAF7F2] p-5 shadow-sm sm:p-6">
   <p className="text-sm font-medium text-[#756457]">
     Total Revenue
   </p>
@@ -228,7 +228,7 @@ const totalRevenue = orders
          {filteredOrders.map((order) => (
             <div
               key={order.id}
-              className="border rounded-xl p-6 shadow-sm bg-white"
+              className="break-words rounded-xl border bg-white p-4 shadow-sm sm:p-6"
             >
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
@@ -314,13 +314,13 @@ const totalRevenue = orders
                   {order.items.map((item) => (
                     <div
                       key={item.id}
-                      className="flex justify-between"
+                    className="flex min-w-0 items-start justify-between gap-4"
                     >
-                      <span>
+                      <span className="min-w-0 break-words">
                         {item.name} × {item.quantity}
                       </span>
 
-                      <span>
+                      <span className="shrink-0">
                         ₹{item.price * item.quantity}
                       </span>
                     </div>

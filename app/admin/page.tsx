@@ -1,143 +1,94 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import {
-  getProducts,
-  deleteProduct,
-} from "@/services/productService";
-import { Product } from "@/types/product";
 
-export default function AdminProductsPage() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+const adminSections = [
+  {
+    number: "01",
+    title: "Manage products",
+    description: "View inventory, update product details, or remove products.",
+    href: "/admin/products",
+    action: "Open products",
+  },
+  {
+    number: "02",
+    title: "Add new product",
+    description: "Create a product, upload its image, and set category, price, and stock.",
+    href: "/admin/products/new",
+    action: "Add product",
+  },
+  {
+    number: "03",
+    title: "Manage orders",
+    description: "Review customer orders and update their fulfillment status.",
+    href: "/admin/orders",
+    action: "Open orders",
+  },
+];
 
-  async function loadProducts() {
-    const data = await getProducts();
-
-    setProducts(data);
-    setLoading(false);
-  }
-
-  useEffect(() => {
-    loadProducts();
-  }, []);
-
-  async function handleDelete(id: string) {
-    const confirmed = confirm(
-      "Are you sure you want to delete this product?"
-    );
-
-    if (!confirmed) return;
-
-    const success = await deleteProduct(id);
-
-    if (success) {
-      setProducts((prev) =>
-        prev.filter((product) => product.id !== id)
-      );
-    } else {
-      alert("Failed to delete product.");
-    }
-  }
-
-  if (loading) {
-    return (
-      <main className="p-10">
-        <h1 className="text-3xl font-bold">
-          Loading products...
-        </h1>
-      </main>
-    );
-  }
-
+export default function AdminDashboardPage() {
   return (
-    <main className="max-w-7xl mx-auto p-10">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-4xl font-bold">
-          Manage Products
-        </h1>
-
-        <Link
-          href="/admin/products/new"
-          className="bg-[#6F4E37] text-white px-5 py-3 rounded-lg"
-        >
-          + Add Product
-        </Link>
-      </div>
-
-      {products.length === 0 ? (
-        <p className="text-gray-500">
-          No products found.
-        </p>
-      ) : (
-        <div className="space-y-4">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="border rounded-xl p-5 flex flex-col md:flex-row md:items-center gap-5"
-            >
-              <img
-                src={product.imageUrl}
-                alt={product.name}
-                className="w-24 h-24 object-cover rounded-lg"
-              />
-
-              <div className="flex-1">
-                <h2 className="text-xl font-semibold">
-                  {product.name}
-                </h2>
-
-                <p className="text-gray-600">
-                  ₹{product.price}
-                </p>
-<div className="mt-2 flex items-center gap-2">
-  <span className="text-sm font-medium">
-    Stock: {product.stock}
-  </span>
-
-  {product.stock === 0 ? (
-    <span className="rounded-full bg-red-100 px-3 py-1 text-xs font-semibold text-red-700">
-      Out of Stock
-    </span>
-  ) : product.stock <= 5 ? (
-    <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">
-      Low Stock
-    </span>
-  ) : (
-    <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
-      In Stock
-    </span>
-  )}
-</div>
-
-                <p className="text-sm text-gray-500">
-                  Category: {product.category}
-                </p>
-              </div>
-
-              <div className="flex gap-3">
-                <Link
-                  href={`/admin/products/${product.id}/edit`}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg"
-                >
-                  Edit
-                </Link>
-
-                <button
-                  onClick={() =>
-                    product.id &&
-                    handleDelete(product.id)
-                  }
-                  className="bg-red-600 text-white px-4 py-2 rounded-lg"
-                >
-                  Delete
-                </button>
-              </div>
+    <main className="min-h-screen bg-[#FAF7F2] px-5 py-10 sm:px-8 sm:py-14">
+      <div className="mx-auto max-w-6xl">
+        <header className="rounded-3xl bg-[#4A2C1A] px-6 py-8 text-white shadow-lg sm:px-10 sm:py-12">
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#E4C686]">
+            CozyCorner Lifestyle
+          </p>
+          <div className="mt-4 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h1 className="font-[var(--font-heading)] text-4xl sm:text-5xl">
+                Admin Dashboard
+              </h1>
+              <p className="mt-3 max-w-xl text-sm leading-6 text-[#F5EAD9] sm:text-base">
+                Manage your store from one place. Start with products, add new
+                items, or keep customer orders moving.
+              </p>
             </div>
-          ))}
-        </div>
-      )}
+
+            <Link
+              href="/"
+              className="inline-flex w-fit rounded-full border border-white/30 px-5 py-3 text-sm font-medium transition hover:bg-white hover:text-[#4A2C1A]"
+            >
+              View storefront →
+            </Link>
+          </div>
+        </header>
+
+        <section className="mt-8" aria-labelledby="admin-actions-heading">
+          <div className="mb-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#B58A32]">
+              Store management
+            </p>
+            <h2
+              id="admin-actions-heading"
+              className="mt-2 font-[var(--font-heading)] text-3xl text-[#4A2C1A]"
+            >
+              Choose what to manage
+            </h2>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            {adminSections.map((section) => (
+              <Link
+                key={section.href}
+                href={section.href}
+                className="group rounded-3xl border border-[#E7DCCF] bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-[#B58A32] hover:shadow-lg"
+              >
+                <p className="text-sm font-bold tracking-[0.2em] text-[#B58A32]">
+                  {section.number}
+                </p>
+                <h3 className="mt-6 font-[var(--font-heading)] text-2xl text-[#4A2C1A]">
+                  {section.title}
+                </h3>
+                <p className="mt-3 min-h-12 text-sm leading-6 text-[#756457]">
+                  {section.description}
+                </p>
+                <span className="mt-7 inline-flex text-sm font-semibold text-[#6F4E37] transition-transform group-hover:translate-x-1">
+                  {section.action} →
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      </div>
     </main>
   );
 }

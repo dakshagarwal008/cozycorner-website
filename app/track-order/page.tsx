@@ -30,7 +30,7 @@ function TrackOrderContent() {
 
   if (loading) {
     return (
-      <main className="max-w-4xl mx-auto py-20 px-6">
+      <main className="mx-auto w-full max-w-4xl px-4 py-12 sm:px-6 sm:py-20">
         Loading...
       </main>
     );
@@ -38,8 +38,8 @@ function TrackOrderContent() {
 
   if (!order) {
     return (
-      <main className="max-w-4xl mx-auto py-20 px-6 text-center">
-        <h1 className="text-3xl font-bold">
+      <main className="mx-auto w-full max-w-4xl px-4 py-12 text-center sm:px-6 sm:py-20">
+        <h1 className="text-2xl font-bold sm:text-3xl">
           Order not found
         </h1>
 
@@ -63,13 +63,13 @@ function TrackOrderContent() {
   const currentStep = steps.indexOf(order.status);
 
   return (
-    <main className="max-w-4xl mx-auto py-20 px-6">
+    <main className="mx-auto w-full max-w-4xl px-4 py-12 sm:px-6 sm:py-20">
 
-      <h1 className="text-4xl font-bold text-[#6F4E37] mb-10">
+      <h1 className="mb-7 text-3xl font-bold text-[#6F4E37] sm:mb-10 sm:text-4xl">
         Track Order
       </h1>
 
-      <div className="bg-white shadow rounded-2xl p-8">
+      <div className="rounded-2xl bg-white p-5 shadow sm:p-8">
 
         <p className="text-gray-500">
           Order ID
@@ -99,7 +99,7 @@ function TrackOrderContent() {
             return (
               <div
                 key={step}
-                className="flex items-center gap-4"
+                className="flex min-w-0 items-center gap-3 sm:gap-4"
               >
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${
@@ -111,7 +111,7 @@ function TrackOrderContent() {
                   {completed ? "✓" : index + 1}
                 </div>
 
-                <span className="capitalize text-lg">
+                <span className="min-w-0 break-words capitalize text-base sm:text-lg">
                   {step}
                 </span>
               </div>
@@ -128,7 +128,7 @@ function TrackOrderContent() {
 
 function LoadingTrackOrder() {
   return (
-    <main className="max-w-4xl mx-auto py-20 px-6">
+    <main className="mx-auto w-full max-w-4xl px-4 py-12 sm:px-6 sm:py-20">
       Loading order...
     </main>
   );

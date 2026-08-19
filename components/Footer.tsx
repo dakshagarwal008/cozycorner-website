@@ -9,24 +9,25 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-[#3F281B] text-white">
+    <footer className="w-full overflow-hidden bg-[#3F281B] text-white">
 
       {/* Main Footer */}
-      <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
+      <div className="mx-auto w-full max-w-7xl px-5 py-12 sm:px-6 sm:py-16 md:px-8 md:py-20">
 
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-12 lg:grid-cols-4 lg:gap-10">
 
           {/* Brand */}
-          <div className="lg:col-span-1">
+          <div className="min-w-0 sm:col-span-2 lg:col-span-1">
+
             <Link
               href="/"
-              className="inline-block font-[var(--font-heading)] text-3xl"
+              className="inline-block font-[var(--font-heading)] text-2xl sm:text-3xl"
             >
               CozyCorner
               <span className="text-[#D4AF37]"> Lifestyle</span>
             </Link>
 
-            <p className="mt-5 max-w-sm text-sm leading-7 text-white/65">
+            <p className="mt-4 max-w-sm text-sm leading-6 text-white/65 sm:mt-5 sm:leading-7">
               Beautiful things for beautiful spaces.
               Discover thoughtfully selected home décor,
               lifestyle products and gifts made to bring
@@ -34,7 +35,8 @@ export default function Footer() {
             </p>
 
             {/* Socials */}
-            <div className="mt-7 flex gap-3">
+            <div className="mt-6 flex gap-3 sm:mt-7">
+
               <a
                 href="#"
                 aria-label="Instagram"
@@ -58,16 +60,19 @@ export default function Footer() {
               >
                 <FaPinterestP />
               </a>
+
             </div>
           </div>
 
           {/* Shop */}
-          <div>
-            <h3 className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-[#D4AF37]">
+          <div className="min-w-0">
+
+            <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#D4AF37] sm:mb-5 sm:text-sm">
               Shop
             </h3>
 
             <div className="flex flex-col gap-3 text-sm text-white/65">
+
               <Link
                 href="/shop"
                 className="transition hover:text-white"
@@ -102,16 +107,19 @@ export default function Footer() {
               >
                 Rakhi Collection
               </Link>
+
             </div>
           </div>
 
           {/* Customer Care */}
-          <div>
-            <h3 className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-[#D4AF37]">
+          <div className="min-w-0">
+
+            <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#D4AF37] sm:mb-5 sm:text-sm">
               Customer Care
             </h3>
 
             <div className="flex flex-col gap-3 text-sm text-white/65">
+
               <Link
                 href="/contact"
                 className="transition hover:text-white"
@@ -146,37 +154,42 @@ export default function Footer() {
               >
                 Privacy Policy
               </Link>
+
             </div>
           </div>
 
           {/* Newsletter */}
-          <div>
-            <h3 className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-[#D4AF37]">
+          <div className="min-w-0 sm:col-span-2 lg:col-span-1">
+
+            <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#D4AF37] sm:mb-5 sm:text-sm">
               Stay Connected
             </h3>
 
-            <p className="text-sm leading-6 text-white/65">
+            <p className="max-w-sm text-sm leading-6 text-white/65">
               Get updates about new collections,
               special offers and seasonal favourites.
             </p>
 
             <form
               onSubmit={(e) => e.preventDefault()}
-              className="mt-5"
+              className="mt-5 w-full"
             >
-              <div className="flex overflow-hidden rounded-full border border-white/15 bg-white/5">
+              <div className="flex w-full overflow-hidden rounded-full border border-white/15 bg-white/5">
+
                 <input
                   type="email"
                   placeholder="Your email"
+                  aria-label="Email address"
                   className="min-w-0 flex-1 bg-transparent px-4 py-3 text-sm text-white outline-none placeholder:text-white/40"
                 />
 
                 <button
                   type="submit"
-                  className="bg-[#D4AF37] px-5 text-sm font-semibold text-[#3F281B] transition hover:bg-[#E4C45A]"
+                  className="shrink-0 bg-[#D4AF37] px-4 text-sm font-semibold text-[#3F281B] transition hover:bg-[#E4C45A] sm:px-5"
                 >
                   Join
                 </button>
+
               </div>
             </form>
           </div>
@@ -186,14 +199,17 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-6 text-center text-xs text-white/45 md:flex-row md:items-center md:justify-between md:text-left">
+
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-2 px-5 py-5 text-center text-[11px] leading-5 text-white/45 sm:px-6 sm:py-6 sm:text-xs md:flex-row md:items-center md:justify-between md:text-left">
 
           <p>
             © 2026 CozyCorner Lifestyle. All rights reserved.
           </p>
 
           <p>
-            Made with <span className="text-[#D4AF37]">♥</span> for beautiful homes.
+            Made with{" "}
+            <span className="text-[#D4AF37]">♥</span>{" "}
+            for beautiful homes.
           </p>
 
         </div>
