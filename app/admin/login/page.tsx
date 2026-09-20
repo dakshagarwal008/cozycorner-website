@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { login } from "@/services/authService";
+import { login, loginWithGoogle } from "@/services/authService";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -27,20 +27,30 @@ export default function AdminLoginPage() {
     }
   }
 
+  async function handleGoogleLogin() {
+    setLoading(true);
+    const success = await loginWithGoogle();
+    setLoading(false);
+
+    if (success) {
+      router.push("/admin");
+    } else {
+      alert("Google sign-in failed. Please try again.");
+    }
+  }
+
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-100">
+    <main className="flex min-h-screen items-center justify-center bg-[#F7F3EE] p-5">
       <form
         onSubmit={handleLogin}
-        className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md"
+        className="w-full max-w-md rounded-3xl border border-[#E7DCCF] bg-white p-6 shadow-xl shadow-[#4A2C1A]/10 sm:p-9"
       >
-        <h1 className="text-3xl font-bold mb-6 text-center">
-          Admin Login
-        </h1>
+        <div className="mb-8 text-center"><p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#B58A32]">CozyCorner Lifestyle</p><h1 className="mt-3 font-[var(--font-heading)] text-3xl text-[#4A2C1A]">Admin sign in</h1><p className="mt-2 text-sm text-[#756457]">Use your administrator account to manage the store.</p></div>
 
         <input
           type="email"
           placeholder="Email"
-          className="w-full border rounded-lg p-3 mb-4"
+          className="mb-4 w-full rounded-xl border border-[#E0D4C6] p-3 outline-none transition focus:border-[#B58A32] focus:ring-2 focus:ring-[#D4AF37]/15"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -48,7 +58,7 @@ export default function AdminLoginPage() {
         <input
           type="password"
           placeholder="Password"
-          className="w-full border rounded-lg p-3 mb-6"
+          className="mb-6 w-full rounded-xl border border-[#E0D4C6] p-3 outline-none transition focus:border-[#B58A32] focus:ring-2 focus:ring-[#D4AF37]/15"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -56,9 +66,16 @@ export default function AdminLoginPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-[#6F4E37] text-white py-3 rounded-lg hover:opacity-90"
+          className="w-full rounded-xl bg-[#6F4E37] py-3 font-semibold text-white transition hover:bg-[#4A2C1A] disabled:cursor-not-allowed disabled:opacity-60"
         >
           {loading ? "Logging in..." : "Login"}
+        </button>
+
+        <div className="my-6 flex items-center gap-3 text-xs text-[#8A786A]"><span className="h-px flex-1 bg-[#E7DCCF]" />OR<span className="h-px flex-1 bg-[#E7DCCF]" /></div>
+
+        <button type="button" onClick={handleGoogleLogin} disabled={loading} className="flex w-full items-center justify-center gap-3 rounded-xl border border-[#D9CABB] bg-white py-3 font-semibold text-[#4A2C1A] transition hover:bg-[#FDF8F2] disabled:cursor-not-allowed disabled:opacity-60">
+          <span className="grid h-5 w-5 place-items-center rounded-full bg-[#4285F4] text-xs font-bold text-white">G</span>
+          Continue with Google
         </button>
       </form>
     </main>

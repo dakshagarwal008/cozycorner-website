@@ -3,18 +3,17 @@
 import Link from "next/link";
 import {
   FaInstagram,
-  FaFacebookF,
-  FaPinterestP,
+  FaPhoneAlt,
 } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="w-full overflow-hidden bg-[#3F281B] text-white">
+    <footer id="contact" className="w-full scroll-mt-24 overflow-hidden bg-[#3F281B] text-white">
 
       {/* Main Footer */}
       <div className="mx-auto w-full max-w-7xl px-5 py-12 sm:px-6 sm:py-16 md:px-8 md:py-20">
 
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-12 lg:grid-cols-4 lg:gap-10">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-12 lg:grid-cols-3 lg:gap-10">
 
           {/* Brand */}
           <div className="min-w-0 sm:col-span-2 lg:col-span-1">
@@ -38,30 +37,24 @@ export default function Footer() {
             <div className="mt-6 flex gap-3 sm:mt-7">
 
               <a
-                href="#"
+                href="https://www.instagram.com/cozycorner_4u?stkn=ZDgzZ2J5NDM0OWNt&utm_source=qr"
                 aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/75 transition hover:border-[#D4AF37] hover:bg-[#D4AF37] hover:text-white"
               >
                 <FaInstagram />
               </a>
 
-              <a
-                href="#"
-                aria-label="Facebook"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/75 transition hover:border-[#D4AF37] hover:bg-[#D4AF37] hover:text-white"
-              >
-                <FaFacebookF />
-              </a>
-
-              <a
-                href="#"
-                aria-label="Pinterest"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/75 transition hover:border-[#D4AF37] hover:bg-[#D4AF37] hover:text-white"
-              >
-                <FaPinterestP />
-              </a>
-
             </div>
+
+            <a
+              href="tel:+917000626375"
+              className="mt-6 inline-flex items-center gap-3 text-sm text-white/75 transition hover:text-[#D4AF37]"
+            >
+              <FaPhoneAlt className="text-[#D4AF37]" />
+              +91 70006 26375
+            </a>
           </div>
 
           {/* Shop */}
@@ -106,53 +99,6 @@ export default function Footer() {
                 className="transition hover:text-white"
               >
                 Rakhi Collection
-              </Link>
-
-            </div>
-          </div>
-
-          {/* Customer Care */}
-          <div className="min-w-0">
-
-            <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#D4AF37] sm:mb-5 sm:text-sm">
-              Customer Care
-            </h3>
-
-            <div className="flex flex-col gap-3 text-sm text-white/65">
-
-              <Link
-                href="/contact"
-                className="transition hover:text-white"
-              >
-                Contact Us
-              </Link>
-
-              <Link
-                href="/about"
-                className="transition hover:text-white"
-              >
-                About Us
-              </Link>
-
-              <Link
-                href="/shipping"
-                className="transition hover:text-white"
-              >
-                Shipping & Delivery
-              </Link>
-
-              <Link
-                href="/returns"
-                className="transition hover:text-white"
-              >
-                Returns & Refunds
-              </Link>
-
-              <Link
-                href="/privacy"
-                className="transition hover:text-white"
-              >
-                Privacy Policy
               </Link>
 
             </div>

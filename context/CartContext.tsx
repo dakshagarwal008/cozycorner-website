@@ -46,6 +46,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 function addToCart(item: CartItem) {
   setCart((prev) => {
     const existing = prev.find((p) => p.id === item.id);
+    const requestedQuantity = Math.max(1, Math.floor(item.quantity || 1));
 
     // Product is completely out of stock
     if (item.stock <= 0) {
@@ -63,7 +64,10 @@ function addToCart(item: CartItem) {
         p.id === item.id
           ? {
               ...p,
-              quantity: p.quantity + 1,
+              quantity: Math.min(
+                p.quantity + requestedQuantity,
+                item.stock
+              ),
               stock: item.stock,
             }
           : p
@@ -75,7 +79,7 @@ function addToCart(item: CartItem) {
       ...prev,
       {
         ...item,
-        quantity: 1,
+        quantity: Math.min(requestedQuantity, item.stock),
       },
     ];
   });

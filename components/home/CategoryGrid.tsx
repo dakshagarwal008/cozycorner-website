@@ -30,7 +30,7 @@ const categories = [
     description: "Celebrate the bond of love",
     href: "/rakhi",
     image:
-      "https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?auto=format&fit=crop&w=900&q=80",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNvlVJJ-B0qwFkIBTdUrbl-o-tFEtEnQ2vWqmPl5honPWyB1Cchd7JZw8&s=10",
   },
 ];
 

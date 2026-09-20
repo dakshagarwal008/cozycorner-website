@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
+import Link from "next/link";
 import { uploadImage } from "@/services/cloudinaryService";
 import { addProduct } from "@/services/productService";
 const CATEGORIES = [
@@ -179,7 +180,15 @@ export default function AddProductPage() {
       <div className="w-full max-w-2xl">
 
         {/* Header */}
-        <div className="mb-8 text-center">
+        <div className="mb-8">
+          <Link
+            href="/admin"
+            className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-[#6F4E37] transition hover:bg-[#F5EAD9]"
+          >
+            ← Back to dashboard
+          </Link>
+
+          <div className="mt-4 text-center">
           <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
             Add New Product
           </h1>
@@ -187,6 +196,7 @@ export default function AddProductPage() {
           <p className="mt-2 text-slate-500">
             Fill in the details below to list a new product in your catalog.
           </p>
+          </div>
         </div>
 
         <div className="bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-100 p-6 sm:p-8">

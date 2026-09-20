@@ -5,6 +5,9 @@
   --foreground: #2b2b2b;
   --primary: #6f4e37;
   --gold: #d4af37;
+  /* Local fallbacks keep production builds independent of Google Fonts. */
+  --font-heading: Georgia, "Times New Roman", serif;
+  --font-body: "Segoe UI", Arial, sans-serif;
 }
 
 * {
