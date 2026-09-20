@@ -9,6 +9,9 @@ import { Product } from "@/types/product";
 export default function RakhiPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const rakhiProducts = products.filter(
+    (product): product is Product & { id: string } => Boolean(product.id)
+  );
 
   useEffect(() => {
     async function loadRakhiProducts() {
@@ -66,7 +69,7 @@ export default function RakhiPage() {
               </div>
             ))}
           </div>
-        ) : products.length === 0 ? (
+        ) : rakhiProducts.length === 0 ? (
           <div className="rounded-2xl border border-[#E7DCCF] bg-white px-5 py-14 text-center shadow-sm sm:rounded-[2rem] sm:px-6 sm:py-20">
             <h2 className="font-[var(--font-heading)] text-2xl text-[#4A2C1A] sm:text-3xl">
               Rakhi collection coming soon
@@ -81,13 +84,13 @@ export default function RakhiPage() {
             <p className="mb-6 text-sm text-[#756457] sm:mb-7">
               Showing{" "}
               <span className="font-semibold text-[#4A2C1A]">
-                {products.length}
+                {rakhiProducts.length}
               </span>{" "}
-              {products.length === 1 ? "product" : "products"}
+              {rakhiProducts.length === 1 ? "product" : "products"}
             </p>
 
             <div className="grid grid-cols-1 gap-x-5 gap-y-10 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-7">
-              {products.map((product) => (
+              {rakhiProducts.map((product) => (
                 <div key={product.id} className="min-w-0">
                   <ProductCard product={product} />
                 </div>
